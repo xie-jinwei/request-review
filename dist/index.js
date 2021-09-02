@@ -6346,33 +6346,51 @@ __nccwpck_require__.r(__webpack_exports__);
 
 
 async function run() {
-    try {
-        const inputs = {
-            token: _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('token') === '' ? process.env["GITHUB_TOKEN"] : _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('token'),
-            owner: _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('repo') === '' ? _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.repo.owner : _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('repo').split('/')[0],
-            repo: _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('repo') === '' ? _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.repo.repo : _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('repo').split('/')[1],
-            number: _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('number') === '' ? _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.payload.pull_request.number : parseInt(_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('number')),
-            reviewers: _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("reviewers") === '' ? [] : _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('reviewers').split(","),
-            team_reviewers: _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('team_reviewers') === '' ? [] : _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('team_reviewers').split(",")
-        };
-
-        const octokit = _actions_github__WEBPACK_IMPORTED_MODULE_1__.getOctokit(inputs.token);
-
-        octokit.rest.pulls.requestReviewers({
-            owner: inputs.owner,
-            repo: inputs.repo,
-            pull_number: inputs.number,
-            reviewers: inputs.reviewers,
-            team_reviewers: inputs.team_reviewers
-        })
-
-    } catch (error) {
-        _actions_core__WEBPACK_IMPORTED_MODULE_0__.debug((0,util__WEBPACK_IMPORTED_MODULE_2__.inspect)(error))
-        _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(error.message)
+  try {
+    const inputs = {
+      token:
+        _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('token') === ''
+          ? _actions_github__WEBPACK_IMPORTED_MODULE_1__.token
+          : _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('token'),
+      owner:
+        _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('repo') === ''
+          ? _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.repo.owner
+          : _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('repo').split('/')[0],
+      repo:
+        _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('repo') === ''
+          ? _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.repo.repo
+          : _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('repo').split('/')[1],
+      number:
+        _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('number') === ''
+          ? _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.payload.pull_request.number
+          : parseInt(_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('number')),
+      reviewers:
+        _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('reviewers') === ''
+          ? []
+          : _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('reviewers').split(','),
+      team_reviewers:
+        _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('team_reviewers') === ''
+          ? []
+          : _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('team_reviewers').split(',')
     }
+
+    const octokit = _actions_github__WEBPACK_IMPORTED_MODULE_1__.getOctokit(inputs.token)
+
+    octokit.rest.pulls.requestReviewers({
+      owner: inputs.owner,
+      repo: inputs.repo,
+      pull_number: inputs.number,
+      reviewers: inputs.reviewers,
+      team_reviewers: inputs.team_reviewers
+    })
+  } catch (error) {
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.debug((0,util__WEBPACK_IMPORTED_MODULE_2__.inspect)(error))
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(error.message)
+  }
 }
 
 run()
+
 })();
 
 module.exports = __webpack_exports__;

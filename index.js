@@ -7,7 +7,7 @@ async function run() {
     const inputs = {
       token:
         core.getInput('token') === ''
-          ? process.env['GITHUB_TOKEN']
+          ? github.token
           : core.getInput('token'),
       owner:
         core.getInput('repo') === ''
