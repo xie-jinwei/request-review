@@ -1,0 +1,24 @@
+name: 'Request reviews'
+description: 'A GitHub Action for requesting reviews on a pull request'
+branding:
+  icon: 'user-check'
+  color: 'green'
+inputs:
+  token:
+    description: 'GitHub token'
+    required: false
+  repo:
+    description: 'Owner + Name of the GitHub repo to request reviewers'
+    required: false
+  number:
+    description: 'Number of the pull requst to request reviewers'
+    required: false
+  reviewers:
+    description: "Reviewers to add, in \",\" separated list"
+    required: false
+  team_reviewers:
+    description: "Team reviewers to add, in \",\" separated list"
+    required: false
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
